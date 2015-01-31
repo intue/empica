@@ -27,7 +27,7 @@
     .state('app', {
       url: "/app",
       abstract: true,
-      templateUrl: "layout.html",
+      templateUrl: "templates/layout.html",
       controller: 'AppController'
     })
 
@@ -35,7 +35,7 @@
       url: '/chats',
       views: {
         'content': {
-          templateUrl: 'chats.html',
+          templateUrl: 'templates/chats.html',
           controller: 'ChatsController'
         }
       }
@@ -45,7 +45,7 @@
       url: '/chats/:chatId',
       views: {
         'content': {
-          templateUrl: 'chat-detail.html',
+          templateUrl: 'templates/chat-detail.html',
           controller: 'ChatDetailController'
         }
       }
