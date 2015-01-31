@@ -24,11 +24,11 @@
 		gifshot.createGIF({
 			gifWidth: 460,
 			gifHeight: 300,
-			interval: 0.4//,
-			// images: [
-			// 	'http://i.imgur.com/2OO33vX.jpg',
-			// 	'http://i.imgur.com/qOwVaSN.png',
-			// 	'http://i.imgur.com/Vo5mFZJ.gif']
+			interval: 0.4,
+			images: [
+				'http://i.imgur.com/2OO33vX.jpg',
+				'http://i.imgur.com/qOwVaSN.png',
+				'http://i.imgur.com/Vo5mFZJ.gif']
 		}, function(obj) {
 		    if(!obj.error) {
 		        $scope.imgSrc = obj.image;
