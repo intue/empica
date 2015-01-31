@@ -2,10 +2,10 @@
 <widget id="com.ionicframework.empica787504" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>empica</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Express yourself with motion picture messages
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="prnawa@gmail.com" href="http://prnawa.github.io/">
+      Intue Team
     </author>
   <content src="index.html"/>
   <access origin="*"/>
