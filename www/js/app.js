@@ -23,14 +23,36 @@
   .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-    .state('chats', {
+
+    .state('app', {
+      url: "/app",
+      abstract: true,
+      templateUrl: "layout.html",
+      controller: 'AppController'
+    })
+
+    .state('app.chats', {
       url: '/chats',
-      templateUrl: 'chats.html',
-      controller: 'ChatsController'
+      views: {
+        'content': {
+          templateUrl: 'chats.html',
+          controller: 'ChatsController'
+        }
+      }
+    })
+
+    .state('app.chat-detail', {
+      url: '/chats/:chatId',
+      views: {
+        'content': {
+          templateUrl: 'chat-detail.html',
+          controller: 'ChatDetailController'
+        }
+      }
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/chats');
+    $urlRouterProvider.otherwise('/app/chats');
   });
 
 })();
