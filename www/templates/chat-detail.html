@@ -1,38 +1,10 @@
 <ion-view view-title="{{chatName}}">
 	<ion-content class="padding messagescroll" start-y="120">
         <ol class="messages">
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
-          </li>
-          <li >
-          	<img ng-src="{{imgSrc}}" />
+          <li collection-repeat="item in items"
+          	  collection-item-height="200">
+          	<img ng-src="{{item.imgSrc}}" ng-click="item.genFunc()"/>
+          	<span>{{item.mpicId}}</span>
           </li>
         </ol>
   	</ion-content>

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 (function(){
-  angular.module('empica', ['ionic', 'empica.controllers'])
+  angular.module('empica', ['ionic', 'empica.controllers', 'empica.services'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

@@ -18,23 +18,35 @@
 		}];
 	}])
 
-	.controller('ChatDetailController', ['$scope', '$stateParams', function($scope, $stateParams){
+	.controller('ChatDetailController', ['$scope', '$stateParams', '$timeout','$ionicScrollDelegate', 'GifGenerator', 
+		function($scope, $stateParams, $timeout, $ionicScrollDelegate, GifGenerator){
+
 		$scope.chatName = $stateParams.chatId;
 
-		gifshot.createGIF({
-			gifWidth: 460,
-			gifHeight: 300,
-			interval: 0.4,
-			images: [
-				'http://i.imgur.com/2OO33vX.jpg',
-				'http://i.imgur.com/qOwVaSN.png',
-				'http://i.imgur.com/Vo5mFZJ.gif']
-		}, function(obj) {
-		    if(!obj.error) {
-		        $scope.imgSrc = obj.image;
-		        $scope.$apply();
-		    }
-		});
+		$scope.items = [];
+
+		var getGenfunc = function (i){
+			return function(){
+				var self = this;
+				this.imgSrc = 'img/loading-icon.gif';
+				GifGenerator.createGIF().then(function(imgData){
+					self.imgSrc = imgData;
+				});
+			};
+		};
+
+		for(var i = 0; i < 100; i++){
+			var genFunc = getGenfunc(i);
+			$scope.items.push({
+				mpicId: i,
+				imgSrc: 'http://i.imgur.com/2OO33vX.jpg',
+				genFunc: genFunc
+			});
+		}
+
+		$timeout(function () {
+			$ionicScrollDelegate.scrollBottom();
+		}, 0);
 
 	}]);
 })();
