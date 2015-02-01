@@ -48,5 +48,29 @@
 			$ionicScrollDelegate.scrollBottom();
 		}, 0);
 
+	}])
+
+	.controller('SearchController', ['$scope', '$ionicModal', 'ImageFinder', function ($scope, $ionicModal, ImageFinder){
+		// Create the login modal that we will use later
+	  	$ionicModal.fromTemplateUrl('templates/image-result.html', {
+			scope: $scope
+		}).then(function(modal) {
+		    $scope.modal = modal;
+	  	});
+
+	  	// Triggered in the login modal to close it
+	  	$scope.closeResult = function() {
+	    	$scope.modal.hide();
+	  	};
+
+
+		$scope.search = function(){
+			console.log('$scope.searchText', $scope.searchText);
+			$scope.htmlContent = '<p>Wow, this is really something huh?</p>';
+			$scope.modal.show();
+			ImageFinder.find().then(function(results){
+				$scope.results = results;
+			});
+		};
 	}]);
 })();
