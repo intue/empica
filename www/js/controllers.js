@@ -7,19 +7,42 @@
 
 	.controller('ChatsController', ['$scope', function($scope){
 		$scope.chats = [{
-			user: 'ruwan',
-			name: 'Ruwan',
-			thumbnail: 'http://icons.iconarchive.com/icons/everaldo/kids-icons/128/thumbnail-icon.png'
-		},
-		{
-			user: 'pradeep',
-			name: 'Pradeep Ruwan',
-			thumbnail: 'http://icons.iconarchive.com/icons/everaldo/kids-icons/128/thumbnail-icon.png'
+			user: 'david',
+			name: 'David',
+			thumbnail: 'img/user/david.png'
+		},{
+			user: 'james',
+			name: 'James',
+			thumbnail: 'img/user/james.png'
+		},{
+			user: 'jennifer',
+			name: 'Jennifer',
+			thumbnail: 'img/user/jennifer.png'
+		},{
+			user: 'kevin',
+			name: 'Kevin',
+			thumbnail: 'img/user/kevin.png'
+		},{
+			user: 'linda',
+			name: 'Linda',
+			thumbnail: 'img/user/linda.png'
+		},{
+			user: 'paul',
+			name: 'Paul',
+			thumbnail: 'img/user/paul.png'
 		}];
 	}])
 
-	.controller('ChatDetailController', ['$scope', '$stateParams', '$timeout','$ionicScrollDelegate', 'GifGenerator', 
-		function($scope, $stateParams, $timeout, $ionicScrollDelegate, GifGenerator){
+	.controller('ChatDetailController', ['$scope',
+		'$stateParams',
+		'$timeout',
+		'$ionicScrollDelegate',
+		'GifGenerator',
+		function($scope,
+			$stateParams,
+			$timeout,
+			$ionicScrollDelegate,
+			GifGenerator){
 
 		$scope.chatName = $stateParams.chatId;
 
@@ -50,26 +73,26 @@
 
 	}])
 
-	.controller('SearchController', ['$scope', '$ionicModal', 'ImageFinder', function ($scope, $ionicModal, ImageFinder){
-		// Create the login modal that we will use later
+	.controller('SearchController', ['$scope',
+		'$ionicModal',
+		'ImageFinder',
+		function ($scope, $ionicModal, ImageFinder){
+
 	  	$ionicModal.fromTemplateUrl('templates/image-result.html', {
 			scope: $scope
 		}).then(function(modal) {
 		    $scope.modal = modal;
 	  	});
 
-	  	// Triggered in the login modal to close it
 	  	$scope.closeResult = function() {
 	    	$scope.modal.hide();
 	  	};
 
 
 		$scope.search = function(){
-			console.log('$scope.searchText', $scope.searchText);
-			$scope.htmlContent = '<p>Wow, this is really something huh?</p>';
-			$scope.modal.show();
 			ImageFinder.find().then(function(results){
 				$scope.results = results;
+				$scope.modal.show();
 			});
 		};
 	}]);
