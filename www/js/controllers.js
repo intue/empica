@@ -5,44 +5,26 @@
 
 	}])
 
-	.controller('ChatsController', ['$scope', function($scope){
-		$scope.chats = [{
-			user: 'david',
-			name: 'David',
-			thumbnail: 'img/user/david.png'
-		},{
-			user: 'james',
-			name: 'James',
-			thumbnail: 'img/user/james.png'
-		},{
-			user: 'jennifer',
-			name: 'Jennifer',
-			thumbnail: 'img/user/jennifer.png'
-		},{
-			user: 'kevin',
-			name: 'Kevin',
-			thumbnail: 'img/user/kevin.png'
-		},{
-			user: 'linda',
-			name: 'Linda',
-			thumbnail: 'img/user/linda.png'
-		},{
-			user: 'paul',
-			name: 'Paul',
-			thumbnail: 'img/user/paul.png'
-		}];
+	.controller('ChatsController', ['$scope', 'DataProvider', function($scope, DataProvider){
+		$scope.chats = DataProvider.getChatHistory();
 	}])
 
 	.controller('ChatDetailController', ['$scope',
 		'$stateParams',
 		'$timeout',
 		'$ionicScrollDelegate',
-		'GifGenerator',
+		'DataProvider',
+		'$compile',
+		'$sce',
+		'ChatSocket',
 		function($scope,
 			$stateParams,
 			$timeout,
 			$ionicScrollDelegate,
-			GifGenerator){
+			DataProvider,
+			$compile,
+			$sce,
+			ChatSocket ){
 
 		$scope.chatName = $stateParams.chatId;
 
@@ -58,14 +40,39 @@
 			};
 		};
 
-		for(var i = 0; i < 100; i++){
-			var genFunc = getGenfunc(i);
-			$scope.items.push({
-				mpicId: i,
-				imgSrc: 'http://i.imgur.com/2OO33vX.jpg',
-				genFunc: genFunc
+		$scope.isQeueuNotEmpty = function(){
+			return !DataProvider.isQueueEmpty();
+		};
+
+		$scope.getSelectedImages = function (){
+			return DataProvider.getSelectedImages();
+		};
+
+		ChatSocket.onReply(function(media){
+			var DATA_SRC_PREFIX = "data:text/html;charset=utf-8,";
+			var HTML5_PLAYER_DATA_CODE =
+				'<html><head></head><body>' +
+				'<video webkit-playsinline width="320" height="240" autoplay="autoplay" loop>' +
+				'<source src="'+ media.data + '">' +
+				'Your browser doesn\'t support HTML5 video.' +
+				'</video>' +
+				'</body></html>';
+
+			var compiledPlayer = $compile('<div>' + HTML5_PLAYER_DATA_CODE + '</div>')($scope);
+
+			$timeout(function(){
+				//Need timeout to wait to get the interpolated html code
+				$scope.iFrameDataSrc = $sce.trustAsResourceUrl(DATA_SRC_PREFIX + escape(compiledPlayer.html()));
 			});
-		}
+		});
+
+		$scope.send = function(){
+			ChatSocket.send({
+				media : DataProvider.getSelectedImages()
+			});
+		};
+
+
 
 		$timeout(function () {
 			$ionicScrollDelegate.scrollBottom();
@@ -76,7 +83,12 @@
 	.controller('SearchController', ['$scope',
 		'$ionicModal',
 		'ImageFinder',
-		function ($scope, $ionicModal, ImageFinder){
+		'DataProvider',
+		function ($scope, $ionicModal, ImageFinder, DataProvider){
+
+		$scope.selectImage = function(imageId){
+			DataProvider.addToQeueu(imageId);
+		};
 
 	  	$ionicModal.fromTemplateUrl('templates/image-result.html', {
 			scope: $scope
@@ -86,6 +98,7 @@
 
 	  	$scope.closeResult = function() {
 	    	$scope.modal.hide();
+	    	$scope.tempdata = "1234";
 	  	};
 
 

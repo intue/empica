@@ -1,13 +1,24 @@
 <ion-view view-title="{{chatName}}">
-	<ion-content class="padding messagescroll" start-y="120">
-        <ol class="messages">
+	<ion-content class="padding">
+	<iframe width="320" height="240" ng-src="{{iFrameDataSrc}}">
+	</iframe>
+	
+        <ul class="messages">
           <li collection-repeat="item in items"
-          	  collection-item-height="200">
-          	<img ng-src="{{item.imgSrc}}" ng-click="item.genFunc()"/>
+          	  collection-item-height="210">
+          	<!-- <img ng-src="{{item.imgSrc}}" ng-click="item.genFunc()"/> -->
           	<span>{{item.mpicId}}</span>
           </li>
-        </ol>
+        </ul>
   	</ion-content>
+  	<div class="temp" ng-if="isQeueuNotEmpty()">
+  		<ion-scroll direction="x" class="wide-as-needed">
+  			<!-- <a ng-repeat="simg in getSelectedImages()"> -->
+  				<img ng-src="{{simg}}"  height="80" ng-repeat="simg in getSelectedImages()"/>
+  				<img ng-src="img/ionic.png"  height="80" ng-click="send()" />
+  			<!-- </a> -->
+	  	</ion-scroll>
+  	</div>
   	<div class="bar bar-footer bar-light item-input-inset" ng-controller="SearchController">
   	   <!-- <label class="item item-input">
 	    <input type="text" placeholder="First Name">

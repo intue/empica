@@ -9,9 +9,9 @@
     <div collection-repeat="result in results"
     	 collection-item-height="200"
     	 collection-item-width="180">
-            <div class="card" >
+            <div class="card" ng-click="selectImage(results[$index].id)">
     		  	  <a class="item item-body" >
-    			    <img class="full-image" ng-src="{{ results[$index] }}">
+    			    <img class="full-image" ng-src="{{ results[$index].imageSrc }}">
     			    <!-- <h2>{{sources[$index].name}}</h2> -->
     		  	  </a>
       		</div>
