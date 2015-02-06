@@ -52,7 +52,7 @@
 			var DATA_SRC_PREFIX = "data:text/html;charset=utf-8,";
 			var HTML5_PLAYER_DATA_CODE =
 				'<html><head></head><body>' +
-				'<video webkit-playsinline width="320" height="240" autoplay="autoplay" loop>' +
+				'<video controls webkit-playsinline width="320" height="240" autoplay="autoplay">' +
 				'<source src="'+ media.data + '">' +
 				'Your browser doesn\'t support HTML5 video.' +
 				'</video>' +
