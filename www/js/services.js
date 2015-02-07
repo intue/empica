@@ -4,32 +4,6 @@
 	.factory('DataProvider', function(){
 		var selectedImages = [];
 
-		var chatHistory = [{
-				user: 'david',
-				name: 'David',
-				thumbnail: 'img/user/david.png'
-			},{
-				user: 'james',
-				name: 'James',
-				thumbnail: 'img/user/james.png'
-			},{
-				user: 'jennifer',
-				name: 'Jennifer',
-				thumbnail: 'img/user/jennifer.png'
-			},{
-				user: 'kevin',
-				name: 'Kevin',
-				thumbnail: 'img/user/kevin.png'
-			},{
-				user: 'linda',
-				name: 'Linda',
-				thumbnail: 'img/user/linda.png'
-			},{
-				user: 'paul',
-				name: 'Paul',
-				thumbnail: 'img/user/paul.png'
-		}];
-
 		var images = [
 				{ imageSrc:'img/dm/despicable-me-2-Minion-1.png', id: 1 },
 				{ imageSrc:'img/dm/despicable-me-2-Minion-2.png', id: 2 },
@@ -97,8 +71,7 @@
 			addToQeueu: addToBuildQueue,
 			isQueueEmpty: isQueueEmpty,
 			getDummySearchResult: getDummySearchResult,
-			getSelectedImages: getSelectedImages,
-			getChatHistory: getChatHistory
+			getSelectedImages: getSelectedImages
 		};
 	})
 

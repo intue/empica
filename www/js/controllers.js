@@ -5,11 +5,7 @@
 
 	}])
 
-	.controller('ChatsController', ['$scope', 'DataProvider', function($scope, DataProvider){
-		$scope.chats = DataProvider.getChatHistory();
-	}])
-
-	.controller('ChatDetailController', ['$scope',
+	.controller('ChatsController', ['$scope',
 		'$stateParams',
 		'$timeout',
 		'$ionicScrollDelegate',

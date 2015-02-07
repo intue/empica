@@ -39,16 +39,6 @@
           controller: 'ChatsController'
         }
       }
-    })
-
-    .state('app.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'content': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailController'
-        }
-      }
     });
 
     // if none of the above states are matched, use this as the fallback
