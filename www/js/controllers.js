@@ -88,6 +88,7 @@
 
 		$scope.selectImage = function(imageId){
 			DataProvider.addToQeueu(imageId);
+			$scope.modal.hide();
 		};
 
 	  	$ionicModal.fromTemplateUrl('templates/image-result.html', {
