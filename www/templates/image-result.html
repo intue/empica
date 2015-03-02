@@ -1,0 +1,13 @@
+<ion-content class="search-result">
+  <div collection-repeat="result in results"
+  	 collection-item-height="200"
+  	 collection-item-width="180">
+          <div class="card" ng-click="selectImage(results[$index].id)">
+  		  	  <a class="item item-body" >
+  			    <img class="full-image" ng-src="{{ results[$index].imageSrc }}">
+  		  	  </a>
+    		</div>
+      </div>
+	</div>
+</ion-content>
+

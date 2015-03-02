@@ -1,0 +1,11 @@
+<div style="display:inline-block;">
+	<img ng-src="{{previewPath}}" style="height:80px">
+</div>
+<div style="display:inline-block">
+	<ion-scroll direction="x" class="wide-as-needed">
+        <a ng-repeat="simg in getSelectedImages()">
+          <img ng-src="{{simg}}"  height="80" ng-repeat="simg in getSelectedImages()"/>
+          <!-- <img ng-src="img/ionic.png"  height="80" ng-click="send()" /> -->
+        </a>
+	</ion-scroll>
+</div>

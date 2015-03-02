@@ -1,0 +1,23 @@
+<ion-view view-title="Empica">
+  <div ng-include="player"></div>
+  <!-- <ion-content class="padding">
+
+        <ul class="messages">
+          <li collection-repeat="item in items"
+              collection-item-height="210">
+            <img ng-src="{{item.imgSrc}}" ng-click="item.genFunc()"/>
+            <span>{{item.mpicId}}</span>
+          </li>
+        </ul>
+    </ion-content> -->
+    <!-- <div class="temp" ng-if="isQeueuNotEmpty()"> -->
+      <!-- <ion-scroll direction="x" class="wide-as-needed"> -->
+        <!-- <a ng-repeat="simg in getSelectedImages()"> -->
+          <!-- <img ng-src="{{simg}}"  height="80" ng-repeat="simg in getSelectedImages()"/> -->
+          <!-- <img ng-src="img/ionic.png"  height="80" ng-click="send()" /> -->
+        <!-- </a> -->
+      <!-- </ion-scroll> -->
+    <!-- </div> -->
+    <div class="preview-box" ng-include="previewbox" ng-if="isQeueuNotEmpty()"></div>
+    <div ng-include="searchbox"></div>
+</ion-view>
