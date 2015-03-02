@@ -26,7 +26,7 @@
 	border-radius:.75rem;
 }
 
-.temp {
+.preview-box {
 	height: 80px;
 	position: absolute;
 	bottom: 44px;
@@ -38,5 +38,9 @@
 .wide-as-needed {
   overflow: scroll;
   white-space: nowrap;
+}
+
+.search-result {
+	bottom: 45px;
 }
 

@@ -1,21 +1,13 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Results</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeResult()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <div collection-repeat="result in results"
-    	 collection-item-height="200"
-    	 collection-item-width="180">
-            <div class="card" ng-click="selectImage(results[$index].id)">
-    		  	  <a class="item item-body" >
-    			    <img class="full-image" ng-src="{{ results[$index].imageSrc }}">
-    			    <!-- <h2>{{sources[$index].name}}</h2> -->
-    		  	  </a>
-      		</div>
-        </div>
-  	</div>
-  </ion-content>
-</ion-modal-view>
+<ion-content class="search-result">
+  <div collection-repeat="result in results"
+  	 collection-item-height="200"
+  	 collection-item-width="180">
+          <div class="card" ng-click="selectImage(results[$index].id)">
+  		  	  <a class="item item-body" >
+  			    <img class="full-image" ng-src="{{ results[$index].imageSrc }}">
+  		  	  </a>
+    		</div>
+      </div>
+	</div>
+</ion-content>
+

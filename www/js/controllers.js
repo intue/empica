@@ -5,46 +5,74 @@
 
 	}])
 
-	.controller('ChatsController', ['$scope',
+	.controller('ChatsController', [
+		'$scope',
 		'$stateParams',
 		'$timeout',
 		'$ionicScrollDelegate',
 		'DataProvider',
-		'$compile',
-		'$sce',
 		'ChatSocket',
 		function($scope,
 			$stateParams,
 			$timeout,
 			$ionicScrollDelegate,
 			DataProvider,
-			$compile,
-			$sce,
 			ChatSocket ){
 
-		$scope.chatName = $stateParams.chatId;
-
 		$scope.items = [];
+		$scope.player = 'templates/player.html';
+		$scope.searchbox = 'templates/searchbox.html';
+		$scope.previewbox = 'templates/previewbox.html';
 
-		var getGenfunc = function (i){
-			return function(){
-				var self = this;
-				this.imgSrc = 'img/loading-icon.gif';
-				GifGenerator.createGIF().then(function(imgData){
-					self.imgSrc = imgData;
-				});
-			};
-		};
 
 		$scope.isQeueuNotEmpty = function(){
 			return !DataProvider.isQueueEmpty();
 		};
 
 		$scope.getSelectedImages = function (){
+			$scope.previewPath = 'img/dm/agnes-overjoyed.png';
+			console.log('getSelectedImages', DataProvider.getSelectedImages());
 			return DataProvider.getSelectedImages();
 		};
 
-		ChatSocket.onReply(function(media){
+		$scope.send = function(){
+			ChatSocket.send({
+				media : DataProvider.getSelectedImages()
+			});
+		};
+
+		$timeout(function () {
+			$ionicScrollDelegate.scrollBottom();
+		}, 0);
+
+	}])
+
+	.controller('SearchController', ['$scope',
+		'ImageFinder',
+		'DataProvider',
+		function ($scope, ImageFinder, DataProvider){
+
+		$scope.search = function($event){
+			$scope.searchResult = 'templates/image-result.html';
+			ImageFinder.find().then(function(results){
+				console.log('results for ');
+				$scope.results = results;
+			});
+		};
+
+		$scope.selectImage = function (imageId){
+			DataProvider.addToQeueu(imageId);
+			$scope.searchResult = null;
+		};
+	}])
+
+	.controller('PlayerController', [
+		'$scope',
+		'$timeout',
+		'$compile',
+		'$sce',
+		'ChatSocket', function ($scope, $timeout, $compile, $sce, ChatSocket){
+			ChatSocket.onReply(function(media){
 			var DATA_SRC_PREFIX = "data:text/html;charset=utf-8,";
 			var HTML5_PLAYER_DATA_CODE =
 				'<html><head></head><body>' +
@@ -61,49 +89,5 @@
 				$scope.iFrameDataSrc = $sce.trustAsResourceUrl(DATA_SRC_PREFIX + escape(compiledPlayer.html()));
 			});
 		});
-
-		$scope.send = function(){
-			ChatSocket.send({
-				media : DataProvider.getSelectedImages()
-			});
-		};
-
-
-
-		$timeout(function () {
-			$ionicScrollDelegate.scrollBottom();
-		}, 0);
-
-	}])
-
-	.controller('SearchController', ['$scope',
-		'$ionicModal',
-		'ImageFinder',
-		'DataProvider',
-		function ($scope, $ionicModal, ImageFinder, DataProvider){
-
-		$scope.selectImage = function(imageId){
-			DataProvider.addToQeueu(imageId);
-			$scope.modal.hide();
-		};
-
-	  	$ionicModal.fromTemplateUrl('templates/image-result.html', {
-			scope: $scope
-		}).then(function(modal) {
-		    $scope.modal = modal;
-	  	});
-
-	  	$scope.closeResult = function() {
-	    	$scope.modal.hide();
-	    	$scope.tempdata = "1234";
-	  	};
-
-
-		$scope.search = function(){
-			ImageFinder.find().then(function(results){
-				$scope.results = results;
-				$scope.modal.show();
-			});
-		};
 	}]);
 })();
